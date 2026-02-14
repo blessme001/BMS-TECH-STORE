@@ -74,10 +74,10 @@
     </div>
   </section>
 
-  <!-- Latest Instagram Feed Section -->
+  <!-- Latest Instagram Posts Section -->
   <section class="container">
     <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Devices Just Posted</h2>
-    <div id="instagram-feed" class="grid grid-3"></div>
+    <div id="instagram-posts" class="grid grid-3"></div>
   </section>
 
   <!-- How It Works -->
@@ -111,39 +111,8 @@
     © 2026 BMS TECH. Phones • Laptops • Gadgets
   </footer>
 
-  <!-- Instagram Embed Script -->
-  <script>
-    const username = 'blessmedammy';
-    const feedContainer = document.getElementById('instagram-feed');
-
-    async function fetchInstagramPosts() {
-      try {
-        const response = await fetch(`https://www.instagram.com/${username}/?__a=1&__d=dis`, { method: 'GET' });
-        const data = await response.json();
-        const posts = data.graphql.user.edge_owner_to_timeline_media.edges;
-
-        posts.slice(0, 6).forEach(post => {
-          const imgUrl = post.node.display_url;
-          const shortcode = post.node.shortcode;
-          const postLink = `https://www.instagram.com/p/${shortcode}/`;
-
-          const card = document.createElement('div');
-          card.className = 'card';
-          card.innerHTML = `
-            <a href='${postLink}' target='_blank'>
-              <img src='${imgUrl}' alt='Instagram Post'>
-            </a>
-          `;
-          feedContainer.appendChild(card);
-        });
-      } catch (err) {
-        console.error('Error fetching Instagram posts:', err);
-        feedContainer.innerHTML = '<p style="text-align:center; color:#d6b98c;">Unable to load Instagram feed.</p>';
-      }
-    }
-
-    fetchInstagramPosts();
-  </script>
+  <!-- Instagram Embed Loader Script -->
+  <script src="insta-embeds/loader.js"></script>
 
 </body>
 </html>
