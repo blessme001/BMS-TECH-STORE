@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #0e0e0e;
       color: white;
     }
@@ -23,7 +24,9 @@
       border-radius: 2rem;
       font-size: 1rem;
       font-weight: bold;
+      transition: transform 0.2s;
     }
+    .btn:hover { transform: scale(1.05); }
     .btn-outline {
       background-color: transparent;
       border: 2px solid #d6b98c;
@@ -31,43 +34,64 @@
     }
     section { padding: 4rem 0; }
     .grid { display: grid; gap: 2rem; }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    .card { background-color: #1c1c1c; border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(214, 185, 140, 0.5); }
-    .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 1rem 1rem 0 0; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    /* Card Styles */
+    .card { 
+      background-color: #1c1c1c; 
+      border-radius: 1rem; 
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(255, 182, 140, 0.5);
+    }
+    .card img { width: 100%; height: 250px; object-fit: cover; }
     .card-content { padding: 1.5rem; }
     .card h3 { color: #d6b98c; margin-bottom: 0.5rem; }
-    footer { padding: 2rem 0; font-size: 0.8rem; color: #aaa; }/* Instagram embed styling */
-#instagram-posts {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-.ig-card {
-  width: 100%;
-  max-width: 540px;
-  margin: 0 auto;
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.ig-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(214, 185, 140, 0.5);
-}
-.ig-card iframe {
-  width: 100% !important;
-  min-width: 320px;
-}
 
+    /* Instagram Section */
+    #instagram-posts {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .insta-wrapper {
+      background: linear-gradient(145deg, #1b1b1b, #222);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+      opacity: 0;
+    }
+    .insta-wrapper:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(214, 185, 140, 0.6);
+    }
+    blockquote.instagram-media {
+      border-radius: 1rem !important;
+      padding: 1rem !important;
+      background-color: #1c1c1c !important;
+    }
+    blockquote.instagram-media a { color: #d6b98c !important; }
+
+    footer { padding: 2rem 0; font-size: 0.8rem; color: #aaa; text-align:center; }
   </style>
 </head>
-<body>  <!-- Hero Section -->  <section class="container text-center">
-    <h1 style="font-size: 3rem; margin-bottom: 1rem;">Premium Phones & Gadgets. <span style="color:#d6b98c;">Delivered Fast.</span></h1>
+<body>
+
+  <!-- Hero Section -->
+  <section class="container text-center">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;">
+      Premium Phones & Gadgets. <span style="color:#d6b98c;">Delivered Fast.</span>
+    </h1>
     <p style="margin-bottom: 2rem;">Trusted source for quality smartphones, laptops, and accessories. Affordable prices, verified devices, and nationwide delivery.</p>
     <a href="#" class="btn" style="margin-right:1rem;">Shop Available Devices</a>
     <a href="https://wa.me/2348155586606" target="_blank" class="btn btn-outline">Chat on WhatsApp</a>
-  </section>  <!-- Features Section -->  <section class="container">
+  </section>
+
+  <!-- Features Section -->
+  <section class="container">
     <div class="grid grid-3">
       <div class="card text-center">
         <div class="card-content">
@@ -88,10 +112,16 @@
         </div>
       </div>
     </div>
-  </section>  <!-- Latest Instagram Posts Section -->  <section class="container">
+  </section>
+
+  <!-- Latest Instagram Posts Section -->
+  <section class="container">
     <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Devices Just Posted</h2>
     <div id="instagram-posts"></div>
-  </section>  <!-- How It Works -->  <section class="container text-center">
+  </section>
+
+  <!-- How It Works -->
+  <section class="container text-center">
     <h2 style="font-size:2rem; margin-bottom:2rem;">How It Works</h2>
     <div class="grid grid-3">
       <div>
@@ -107,11 +137,21 @@
         <p>Make payment and get fast delivery anywhere in Nigeria.</p>
       </div>
     </div>
-  </section>  <!-- CTA Section -->  <section class="container text-center" style="background-color:#151515;">
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container text-center" style="background-color:#151515;">
     <h2 style="font-size:2rem; margin-bottom:1rem;">Ready to Get Your Device?</h2>
     <p style="margin-bottom:2rem;">Click below to chat instantly and secure your gadget today.</p>
     <a href="https://wa.me/2348155586606" target="_blank" class="btn">Start WhatsApp Chat</a>
-  </section>  <!-- Footer -->  <footer class="text-center">
+  </section>
+
+  <!-- Footer -->
+  <footer>
     © 2026 BMS TECH. Phones • Laptops • Gadgets
-  </footer>  <!-- Instagram Embed Loader Script -->  <script src="insta-embeds/loader.js"></script></body>
+  </footer>
+
+  <!-- Instagram Embed Loader Script -->
+  <script src="insta-embeds/loader.js"></script>
+</body>
 </html>
