@@ -24,7 +24,9 @@
       border-radius: 2rem;
       font-size: 1rem;
       font-weight: bold;
+      transition: transform 0.2s;
     }
+    .btn:hover { transform: scale(1.05); }
     .btn-outline {
       background-color: transparent;
       border: 2px solid #d6b98c;
@@ -33,11 +35,35 @@
     section { padding: 4rem 0; }
     .grid { display: grid; gap: 2rem; }
     .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    .card { background-color: #1c1c1c; border-radius: 1rem; overflow: hidden; }
+    .card { background-color: #1c1c1c; border-radius: 1rem; overflow: hidden; position: relative; transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
     .card img { width: 100%; height: 250px; object-fit: cover; }
     .card-content { padding: 1.5rem; }
     .card h3 { color: #d6b98c; margin-bottom: 0.5rem; }
     footer { padding: 2rem 0; font-size: 0.8rem; color: #aaa; }
+
+    /* Instagram Reel Embed Styling */
+    .ig-card {
+      background-color: #1a1a1a;
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .ig-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ig-card iframe, .ig-card blockquote {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -74,13 +100,17 @@
     </div>
   </section>
 
-  <!-- Latest Instagram Posts Section -->
+  <!-- Latest Instagram Reel Section -->
   <section class="container">
-    <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Devices Just Posted</h2>
-    <div id="instagram-posts" class="grid grid-3"></div>
-    <p class="text-center" style="margin-top:1rem; font-size:0.9rem; color:#aaa;">
-      Can't see posts? <a href="https://www.instagram.com/blessmedammy" target="_blank" style="color:#d6b98c;">View on Instagram</a>
-    </p>
+    <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Device Reel</h2>
+
+    <!-- Instagram Embed -->
+    <div class="ig-card text-center">
+      <!-- NEW PLACEHOLDER: Drop Instagram embed here -->
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSQekeIAIsf/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; margin:0 auto; max-width:400px; width:100%; padding:0;">
+        <a href="https://www.instagram.com/reel/DSQekeIAIsf/?utm_source=ig_embed" target="_blank"></a>
+      </blockquote>
+    </div>
   </section>
 
   <!-- How It Works -->
@@ -114,61 +144,24 @@
     © 2026 BMS TECH. Phones • Laptops • Gadgets
   </footer>
 
-  <!-- Instagram Embed Loader Script -->
+  <!-- Instagram Embed Script -->
+  <script async src="//www.instagram.com/embed.js"></script>
+
+  <!-- Scroll Fade-in Animation -->
   <script>
-    const postsContainer = document.getElementById("instagram-posts");
+    document.addEventListener('DOMContentLoaded', () => {
+      const igCard = document.querySelector('.ig-card');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
 
-    const instagramPosts = [
-      "https://www.instagram.com/reel/DSQekeIAIsf/"
-      // Add more reels/posts here
-    ];
-
-    function createInstagramCard(url) {
-      const card = document.createElement("div");
-      card.className = "card insta-card";
-
-      const img = document.createElement("img");
-      img.src = `https://instagram.com/p/${url.split("/").filter(Boolean).pop()}/media/?size=l`;
-      img.alt = "Instagram post";
-      img.style.cursor = "pointer";
-      img.onclick = () => window.open(url, "_blank");
-
-      const overlay = document.createElement("div");
-      overlay.className = "insta-overlay";
-      overlay.innerHTML = `<p>View Post</p>`;
-
-      card.appendChild(img);
-      card.appendChild(overlay);
-
-      return card;
-    }
-
-    instagramPosts.forEach((url, index) => {
-      const card = createInstagramCard(url);
-      card.style.opacity = 0;
-      card.style.transform = "translateY(20px)";
-      postsContainer.appendChild(card);
-
-      setTimeout(() => {
-        card.style.transition = "all 0.6s ease-out";
-        card.style.opacity = 1;
-        card.style.transform = "translateY(0)";
-      }, index * 200);
+      observer.observe(igCard);
     });
-
-    const style = document.createElement("style");
-    style.innerHTML = `
-      .insta-card { position: relative; overflow: hidden; border-radius: 1rem; }
-      .insta-card img { width: 100%; height: 250px; object-fit: cover; display: block; }
-      .insta-overlay { position: absolute; bottom:0; left:0; right:0; background: rgba(0,0,0,0.6); color:#fff; text-align:center; padding:0.5rem 0; font-weight:bold; opacity:0; transition: all 0.3s ease-in-out; cursor:pointer; }
-      .insta-card:hover .insta-overlay { opacity:1; }
-
-      @media(max-width:768px) {
-        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-        .insta-card img { height:200px; }
-      }
-    `;
-    document.head.appendChild(style);
   </script>
 
 </body>
