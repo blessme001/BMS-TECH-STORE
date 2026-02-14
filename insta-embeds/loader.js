@@ -1,43 +1,34 @@
-// Select the container where the Instagram embed will go
-const instagramContainer = document.getElementById('instagram-posts');
+// insta-embeds/loader.js
 
-// Your Instagram Reel URL
-const reelURL = "https://www.instagram.com/reel/DSQekeIAIsf/?utm_source=ig_embed&utm_campaign=loading";
+document.addEventListener("DOMContentLoaded", () => {
+  const postsContainer = document.getElementById("instagram-posts");
 
-// Create the blockquote element for the embed
-const blockquote = document.createElement('blockquote');
-blockquote.className = "instagram-media";
-blockquote.setAttribute("data-instgrm-captioned", "");
-blockquote.setAttribute("data-instgrm-permalink", reelURL);
-blockquote.setAttribute("data-instgrm-version", "14");
-blockquote.style = `
-  background:#FFF; 
-  border:0; 
-  border-radius:3px; 
-  box-shadow:0 0 1px 0 rgba(0,0,0,0.5),
-             0 1px 10px 0 rgba(0,0,0,0.15); 
-  margin: 1px; 
-  max-width:540px; 
-  min-width:326px; 
-  padding:0; 
-  width:99.375%; 
-  width:-webkit-calc(100% - 2px); 
-  width:calc(100% - 2px);
-`;
+  // Add your Instagram embed URLs here
+  const instaPosts = [
+    "https://www.instagram.com/reel/DSQekeIAIsf/?utm_source=ig_embed&utm_campaign=loading",
+    // You can add more posts as needed
+  ];
 
-// Append it to the container
-instagramContainer.appendChild(blockquote);
+  instaPosts.forEach((url, index) => {
+    const card = document.createElement("div");
+    card.className = "ig-card fade-in";
+    card.style.animationDelay = `${0.2 + index * 0.2}s`;
 
-// Load Instagram embed script
-if (!window.instgrm) {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = "//www.instagram.com/embed.js";
-    document.body.appendChild(script);
+    const iframe = document.createElement("iframe");
+    iframe.src = `${url}embed`;
+    iframe.style.width = "100%";
+    iframe.style.height = "400px";
+    iframe.style.border = "0";
+    iframe.style.borderRadius = "1rem";
+    iframe.allow = "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
 
-    script.onload = () => {
-        window.instgrm.Embeds.process();
-    };
-} else {
-    window.instgrm.Embeds.process();
-}
+    const overlay = document.createElement("div");
+    overlay.className = "overlay";
+    overlay.innerHTML = `<span>View on Instagram</span>`;
+
+    card.appendChild(iframe);
+    card.appendChild(overlay);
+    postsContainer.appendChild(card);
+  });
+});
