@@ -24,9 +24,7 @@
       border-radius: 2rem;
       font-size: 1rem;
       font-weight: bold;
-      transition: transform 0.2s;
     }
-    .btn:hover { transform: scale(1.05); }
     .btn-outline {
       background-color: transparent;
       border: 2px solid #d6b98c;
@@ -34,35 +32,35 @@
     }
     section { padding: 4rem 0; }
     .grid { display: grid; gap: 2rem; }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    .card { background-color: #1c1c1c; border-radius: 1rem; overflow: hidden; position: relative; transition: transform 0.3s; }
-    .card:hover { transform: translateY(-5px); }
-    .card img { width: 100%; height: 250px; object-fit: cover; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card { background-color: #1c1c1c; border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(214, 185, 140, 0.5); }
+    .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 1rem 1rem 0 0; }
     .card-content { padding: 1.5rem; }
     .card h3 { color: #d6b98c; margin-bottom: 0.5rem; }
     footer { padding: 2rem 0; font-size: 0.8rem; color: #aaa; }
 
-    /* Instagram Reel Embed Styling */
+    /* Instagram embed styling */
+    #instagram-posts {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
     .ig-card {
-      background-color: #1a1a1a;
-      border-radius: 1rem;
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-    .ig-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .ig-card iframe, .ig-card blockquote {
       width: 100%;
-      max-width: 400px;
+      max-width: 540px;
+      margin: 0 auto;
       border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ig-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(214, 185, 140, 0.5);
+    }
+    .ig-card iframe {
+      width: 100% !important;
+      min-width: 320px;
     }
   </style>
 </head>
@@ -100,17 +98,10 @@
     </div>
   </section>
 
-  <!-- Latest Instagram Reel Section -->
+  <!-- Latest Instagram Posts Section -->
   <section class="container">
-    <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Device Reel</h2>
-
-    <!-- Instagram Embed -->
-    <div class="ig-card text-center">
-      <!-- NEW PLACEHOLDER: Drop Instagram embed here -->
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSQekeIAIsf/?utm_source=ig_embed" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:12px; margin:0 auto; max-width:400px; width:100%; padding:0;">
-        <a href="https://www.instagram.com/reel/DSQekeIAIsf/?utm_source=ig_embed" target="_blank"></a>
-      </blockquote>
-    </div>
+    <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Devices Just Posted</h2>
+    <div id="instagram-posts"></div>
   </section>
 
   <!-- How It Works -->
@@ -144,25 +135,9 @@
     © 2026 BMS TECH. Phones • Laptops • Gadgets
   </footer>
 
-  <!-- Instagram Embed Script -->
-  <script async src="//www.instagram.com/embed.js"></script>
-
-  <!-- Scroll Fade-in Animation -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const igCard = document.querySelector('.ig-card');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      observer.observe(igCard);
-    });
-  </script>
+  <!-- Instagram Embed Loader Script -->
+    <!-- Instagram Embed Loader Script -->
+  <script src="./insta-embeds/loader.js" defer></script>
 
 </body>
 </html>
