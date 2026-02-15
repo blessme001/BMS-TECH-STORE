@@ -1,142 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BMS TECH - Phones & Gadgets</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: #0e0e0e;
-      color: white;
-    }
-    a { text-decoration: none; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-    .text-center { text-align: center; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: #d6b98c;
-      color: black;
-      padding: 1rem 2rem;
-      border-radius: 2rem;
-      font-size: 1rem;
-      font-weight: bold;
-    }
-    .btn-outline {
-      background-color: transparent;
-      border: 2px solid #d6b98c;
-      color: #d6b98c;
-    }
-    section { padding: 4rem 0; }
-    .grid { display: grid; gap: 2rem; }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    .card { background-color: #1c1c1c; border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(214, 185, 140, 0.5); }
-    .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 1rem 1rem 0 0; }
-    .card-content { padding: 1.5rem; }
-    .card h3 { color: #d6b98c; margin-bottom: 0.5rem; }
-    footer { padding: 2rem 0; font-size: 0.8rem; color: #aaa; }
-
-    /* Instagram embed styling */
-    #instagram-posts {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    .ig-card {
-      width: 100%;
-      max-width: 540px;
-      margin: 0 auto;
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .ig-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(214, 185, 140, 0.5);
-    }
-    .ig-card iframe {
-      width: 100% !important;
-      min-width: 320px;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#0e0e0e] text-white font-sans">
 
   <!-- Hero Section -->
-  <section class="container text-center">
-    <h1 style="font-size: 3rem; margin-bottom: 1rem;">Premium Phones & Gadgets. <span style="color:#d6b98c;">Delivered Fast.</span></h1>
-    <p style="margin-bottom: 2rem;">Trusted source for quality smartphones, laptops, and accessories. Affordable prices, verified devices, and nationwide delivery.</p>
-    <a href="#" class="btn" style="margin-right:1rem;">Shop Available Devices</a>
-    <a href="https://wa.me/2348155586606" target="_blank" class="btn btn-outline">Chat on WhatsApp</a>
-  </section>
-
-  <!-- Features Section -->
-  <section class="container">
-    <div class="grid grid-3">
-      <div class="card text-center">
-        <div class="card-content">
-          <h3>Verified Smartphones</h3>
-          <p>Brand new and neatly used phones tested for quality and performance.</p>
-        </div>
-      </div>
-      <div class="card text-center">
-        <div class="card-content">
-          <h3>Laptops & Accessories</h3>
-          <p>Reliable laptops and original accessories for work, school, and business.</p>
-        </div>
-      </div>
-      <div class="card text-center">
-        <div class="card-content">
-          <h3>Warranty & Trust</h3>
-          <p>Honest deals, device checks, and after-sale support you can rely on.</p>
-        </div>
-      </div>
+  <section class="max-w-6xl mx-auto px-6 py-16 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">
+      Premium Phones & Gadgets.
+      <span class="text-[#d6b98c]"> Delivered Fast.</span>
+    </h1>
+    <p class="mb-8 text-lg text-gray-300">
+      Trusted source for quality smartphones, laptops, and accessories.
+      Affordable prices, verified devices, and nationwide delivery.
+    </p>
+    <div class="flex justify-center gap-4 flex-wrap">
+      <a href="#" class="bg-[#d6b98c] text-black px-8 py-3 rounded-full font-semibold hover:scale-105 transition">
+        Shop Available Devices
+      </a>
+      <a
+        href="https://wa.me/2348155586606"
+        target="_blank"
+        class="border-2 border-[#d6b98c] text-[#d6b98c] px-8 py-3 rounded-full font-semibold hover:bg-[#d6b98c] hover:text-black transition"
+      >
+        Chat on WhatsApp
+      </a>
     </div>
   </section>
 
-  <!-- Latest Instagram Posts Section -->
-  <section class="container">
-    <h2 class="text-center" style="font-size: 2rem; margin-bottom:2rem;">Latest Devices Just Posted</h2>
-    <div id="instagram-posts"></div>
+  <!-- Features Section -->
+  <section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8">
+    <div class="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(214,185,140,0.5)] transition">
+      <h3 class="text-[#d6b98c] text-xl font-semibold mb-4">Verified Smartphones</h3>
+      <p class="text-gray-300">Brand new and neatly used phones tested for quality and performance.</p>
+    </div>
+
+    <div class="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(214,185,140,0.5)] transition">
+      <h3 class="text-[#d6b98c] text-xl font-semibold mb-4">Laptops & Accessories</h3>
+      <p class="text-gray-300">Reliable laptops and original accessories for work, school, and business.</p>
+    </div>
+
+    <div class="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(214,185,140,0.5)] transition">
+      <h3 class="text-[#d6b98c] text-xl font-semibold mb-4">Warranty & Trust</h3>
+      <p class="text-gray-300">Honest deals, device checks, and after-sale support you can rely on.</p>
+    </div>
+  </section>
+
+  <!-- Instagram Section -->
+  <section class="max-w-6xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold mb-10">Latest Devices Just Posted</h2>
+    <div id="instagram-posts" class="flex justify-center"></div>
   </section>
 
   <!-- How It Works -->
-  <section class="container text-center">
-    <h2 style="font-size:2rem; margin-bottom:2rem;">How It Works</h2>
-    <div class="grid grid-3">
+  <section class="max-w-6xl mx-auto px-6 py-16 text-center">
+    <h2 class="text-3xl font-bold mb-12">How It Works</h2>
+    <div class="grid md:grid-cols-3 gap-10">
       <div>
-        <h3 style="color:#d6b98c;">1</h3>
-        <p>Browse available devices and select what you need.</p>
+        <h3 class="text-[#d6b98c] text-2xl font-bold mb-4">1</h3>
+        <p class="text-gray-300">Browse available devices and select what you need.</p>
       </div>
       <div>
-        <h3 style="color:#d6b98c;">2</h3>
-        <p>Chat with us on WhatsApp to confirm availability and price.</p>
+        <h3 class="text-[#d6b98c] text-2xl font-bold mb-4">2</h3>
+        <p class="text-gray-300">Chat with us on WhatsApp to confirm availability and price.</p>
       </div>
       <div>
-        <h3 style="color:#d6b98c;">3</h3>
-        <p>Make payment and get fast delivery anywhere in Nigeria.</p>
+        <h3 class="text-[#d6b98c] text-2xl font-bold mb-4">3</h3>
+        <p class="text-gray-300">Make payment and get fast delivery anywhere in Nigeria.</p>
       </div>
     </div>
   </section>
 
   <!-- CTA Section -->
-  <section class="container text-center" style="background-color:#151515;">
-    <h2 style="font-size:2rem; margin-bottom:1rem;">Ready to Get Your Device?</h2>
-    <p style="margin-bottom:2rem;">Click below to chat instantly and secure your gadget today.</p>
-    <a href="https://wa.me/2348155586606" target="_blank" class="btn">Start WhatsApp Chat</a>
+  <section class="bg-[#151515] py-16 text-center">
+    <h2 class="text-3xl font-bold mb-6">Ready to Get Your Device?</h2>
+    <p class="mb-8 text-gray-300">Click below to chat instantly and secure your gadget today.</p>
+    <a
+      href="https://wa.me/2348155586606"
+      target="_blank"
+      class="bg-[#d6b98c] text-black px-10 py-4 rounded-full font-semibold hover:scale-105 transition"
+    >
+      Start WhatsApp Chat
+    </a>
   </section>
 
   <!-- Footer -->
-  <footer class="text-center">
+  <footer class="text-center py-8 text-gray-500 text-sm">
     © 2026 BMS TECH. Phones • Laptops • Gadgets
   </footer>
 
-  <!-- Instagram Embed Loader Script -->
-    <!-- Instagram Embed Loader Script -->
+  <!-- Instagram Loader Script -->
   <script src="./insta-embeds/loader.js" defer></script>
 
 </body>
