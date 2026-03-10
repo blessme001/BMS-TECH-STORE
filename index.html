@@ -3,98 +3,1106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BMS TECH - Phones & Gadgets</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#0e0e0e] text-white font-sans">
+  <title>BMS TECH — Phones & Gadgets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <!-- Hero Section -->
-  <section class="max-w-6xl mx-auto px-6 py-16 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold mb-6">
-      Premium Phones & Gadgets.
-      <span class="text-[#d6b98c]"> Delivered Fast.</span>
-    </h1>
-    <p class="mb-8 text-lg text-gray-300">
-      Trusted source for quality smartphones, laptops, and accessories.
-      Affordable prices, verified devices, and nationwide delivery.
-    </p>
-    <div class="flex justify-center gap-4 flex-wrap">
-      <a href="#" class="bg-[#d6b98c] text-black px-8 py-3 rounded-full font-semibold hover:scale-105 transition">
-        Shop Available Devices
-      </a>
-      <a
-        href="https://wa.me/2348155586606"
-        target="_blank"
-        class="border-2 border-[#d6b98c] text-[#d6b98c] px-8 py-3 rounded-full font-semibold hover:bg-[#d6b98c] hover:text-black transition"
-      >
+    :root {
+      --gold: #d6b98c;
+      --gold-light: #e8d0a9;
+      --gold-dark: #b8935a;
+      --bg: #090909;
+      --bg2: #111111;
+      --bg3: #181818;
+      --card: #141414;
+      --border: rgba(214,185,140,0.15);
+      --text: #f0ece4;
+      --muted: #888078;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9,9,9,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--text); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: #000 !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 100px;
+      font-weight: 600 !important;
+      font-size: 0.88rem !important;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; transform: scale(1.04); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0; right: 0;
+      background: rgba(9,9,9,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5% 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu a:last-child { color: var(--gold); border-bottom: none; }
+    .mobile-menu a.mob-cta {
+      background: var(--gold);
+      color: #000;
+      text-align: center;
+      padding: 0.8rem;
+      border-radius: 100px;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 5% 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 10%, rgba(214,185,140,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(214,185,140,0.06) 0%, transparent 60%);
+    }
+
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(214,185,140,0.08);
+    }
+    .ring1 { width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .ring2 { width: 900px; height: 900px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .ring3 { width: 1200px; height: 1200px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    .hero-content { position: relative; z-index: 2; max-width: 780px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(214,185,140,0.1);
+      border: 1px solid rgba(214,185,140,0.25);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+
+    @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.07;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #000;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(214,185,140,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(214,185,140,0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(214,185,140,0.4);
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-outline:hover {
+      background: rgba(214,185,140,0.08);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.4s ease both;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Section shared ── */
+    section { padding: 5rem 5%; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Features ── */
+    .features { background: var(--bg2); }
+    .features-inner { max-width: 1200px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5px; background: var(--border); border-radius: 20px; overflow: hidden; }
+    .feat-card {
+      background: var(--card);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feat-card:hover { background: #1a1a1a; }
+    .feat-card:hover::before { opacity: 1; }
+    .feat-icon {
+      width: 48px; height: 48px;
+      background: rgba(214,185,140,0.1);
+      border: 1px solid rgba(214,185,140,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .feat-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .feat-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; font-weight: 300; }
+
+    /* ── Catalog ── */
+    .catalog-inner { max-width: 1200px; margin: 0 auto; }
+    .catalog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .tab:hover, .tab.active {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      display: none;
+    }
+    .product-card.visible { display: block; }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(214,185,140,0.2);
+      border-color: rgba(214,185,140,0.3);
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4));
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: var(--gold);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      z-index: 1;
+    }
+    .badge-used { background: #3a3a3a; color: var(--gold); border: 1px solid rgba(214,185,140,0.3); }
+    .badge-hot { background: #c0392b; color: #fff; }
+
+    .product-body { padding: 1.25rem; }
+    .product-category { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.35rem; }
+    .product-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; }
+    .product-specs { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; font-weight: 300; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+    .product-price small { font-size: 0.7rem; color: var(--muted); display: block; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.2s, transform 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-wa:hover { background: #1ebe5d; transform: scale(1.05); }
+
+    /* ── How it works ── */
+    .how { background: var(--bg2); }
+    .how-inner { max-width: 1200px; margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
+    }
+    .step { text-align: center; position: relative; }
+    .step-num {
+      width: 60px; height: 60px;
+      background: var(--card);
+      border: 1px solid rgba(214,185,140,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .step h3 { font-family: 'Syne', sans-serif; font-weight: 600; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.9rem; color: var(--muted); font-weight: 300; }
+
+    /* ── Testimonials ── */
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .testi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+    }
+    .testi-card::before {
+      content: '"';
+      position: absolute;
+      top: 0.5rem; right: 1.25rem;
+      font-size: 5rem;
+      font-family: 'Syne', sans-serif;
+      color: rgba(214,185,140,0.1);
+      line-height: 1;
+    }
+    .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+    .testi-text { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; font-weight: 300; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+    .testi-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(214,185,140,0.15);
+      border: 1px solid rgba(214,185,140,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .testi-name { font-weight: 600; font-size: 0.9rem; }
+    .testi-loc { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--bg2);
+      text-align: center;
+    }
+    .cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .cta-section h2 span { color: var(--gold); }
+    .cta-section p { color: var(--muted); margin-bottom: 2.5rem; font-weight: 300; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 5% 2rem;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand { }
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-logo span { color: var(--text); }
+    .footer-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-width: 280px; font-weight: 300; }
+    .footer-col h4 { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); margin-bottom: 1.25rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+    .footer-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.25);
+      color: #25D366;
+      text-decoration: none;
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .footer-wa:hover { background: rgba(37,211,102,0.18); }
+
+    /* ── Floating WA button ── */
+    .float-wa {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #25D366;
+      color: #fff;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      z-index: 200;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.65); }
+    .float-wa-pulse {
+      position: absolute;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: #25D366;
+      animation: waPulse 2s infinite;
+      z-index: -1;
+    }
+    @keyframes waPulse { 0% { transform:scale(1); opacity:0.5 } 100% { transform:scale(1.7); opacity:0 } }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 4rem 5% 3rem; min-height: 80vh; }
+      .ring2, .ring3 { display: none; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .steps::before { display: none; }
+      section { padding: 3.5rem 5%; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero-stats { gap: 1.5rem; }
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Floating WhatsApp ── -->
+<a href="https://wa.me/2348155586606?text=Hi%20BMS%20TECH%2C%20I%20want%20to%20buy%20a%20device" target="_blank" class="float-wa" title="Chat on WhatsApp">
+  <div class="float-wa-pulse"></div>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ── Nav ── -->
+<nav>
+  <a href="#" class="nav-logo">BMS<span> TECH</span></a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Catalog</a></li>
+    <li><a href="#features">Why Us</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="https://wa.me/2348155586606" target="_blank" class="nav-cta">WhatsApp Us</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#catalog" onclick="toggleMenu()">Catalog</a>
+  <a href="#features" onclick="toggleMenu()">Why Us</a>
+  <a href="#how" onclick="toggleMenu()">How It Works</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="https://wa.me/2348155586606" target="_blank" class="mob-cta">💬 Chat on WhatsApp</a>
+</div>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring ring1"></div>
+  <div class="hero-ring ring2"></div>
+  <div class="hero-ring ring3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Now accepting orders nationwide</div>
+    <h1>Premium Phones & Gadgets. <em>Delivered Fast.</em></h1>
+    <p>Trusted source for quality smartphones, laptops, and accessories. Affordable prices, verified devices, and nationwide delivery across Nigeria.</p>
+    <div class="hero-actions">
+      <a href="#catalog" class="btn-primary">Browse Catalog →</a>
+      <a href="https://wa.me/2348155586606?text=Hi%2C%20I%20want%20to%20order%20a%20device" target="_blank" class="btn-outline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Chat on WhatsApp
       </a>
     </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8">
-    <div class="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(214,185,140,0.5)] transition">
-      <h3 class="text-[#d6b98c] text-xl font-semibold mb-4">Verified Smartphones</h3>
-      <p class="text-gray-300">Brand new and neatly used phones tested for quality and performance.</p>
-    </div>
-
-    <div class="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(214,185,140,0.5)] transition">
-      <h3 class="text-[#d6b98c] text-xl font-semibold mb-4">Laptops & Accessories</h3>
-      <p class="text-gray-300">Reliable laptops and original accessories for work, school, and business.</p>
-    </div>
-
-    <div class="bg-[#1c1c1c] p-8 rounded-2xl shadow-lg hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(214,185,140,0.5)] transition">
-      <h3 class="text-[#d6b98c] text-xl font-semibold mb-4">Warranty & Trust</h3>
-      <p class="text-gray-300">Honest deals, device checks, and after-sale support you can rely on.</p>
-    </div>
-  </section>
-
-  <!-- Instagram Section -->
-  <section class="max-w-6xl mx-auto px-6 py-16 text-center">
-    <h2 class="text-3xl font-bold mb-10">Latest Devices Just Posted</h2>
-    <div id="instagram-posts" class="flex justify-center"></div>
-  </section>
-
-  <!-- How It Works -->
-  <section class="max-w-6xl mx-auto px-6 py-16 text-center">
-    <h2 class="text-3xl font-bold mb-12">How It Works</h2>
-    <div class="grid md:grid-cols-3 gap-10">
-      <div>
-        <h3 class="text-[#d6b98c] text-2xl font-bold mb-4">1</h3>
-        <p class="text-gray-300">Browse available devices and select what you need.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Devices Sold</div>
       </div>
-      <div>
-        <h3 class="text-[#d6b98c] text-2xl font-bold mb-4">2</h3>
-        <p class="text-gray-300">Chat with us on WhatsApp to confirm availability and price.</p>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Verified Quality</div>
       </div>
-      <div>
-        <h3 class="text-[#d6b98c] text-2xl font-bold mb-4">3</h3>
-        <p class="text-gray-300">Make payment and get fast delivery anywhere in Nigeria.</p>
+      <div class="stat">
+        <div class="stat-num">24h</div>
+        <div class="stat-label">Fast Delivery</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Customer Rating</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA Section -->
-  <section class="bg-[#151515] py-16 text-center">
-    <h2 class="text-3xl font-bold mb-6">Ready to Get Your Device?</h2>
-    <p class="mb-8 text-gray-300">Click below to chat instantly and secure your gadget today.</p>
-    <a
-      href="https://wa.me/2348155586606"
-      target="_blank"
-      class="bg-[#d6b98c] text-black px-10 py-4 rounded-full font-semibold hover:scale-105 transition"
-    >
-      Start WhatsApp Chat
-    </a>
-  </section>
+<!-- ── Features ── -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="section-label">Why Choose Us</div>
+    <div class="section-title">Built on Trust & Quality</div>
+    <p class="section-sub">Everything we sell is checked, tested, and ready to use — backed by after-sale support.</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📱</div>
+        <h3>Verified Smartphones</h3>
+        <p>Brand new and neatly used phones tested for quality and performance before every sale.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💻</div>
+        <h3>Laptops & Accessories</h3>
+        <p>Reliable laptops and original accessories for work, school, and business use.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🛡️</div>
+        <h3>Warranty & After-Sale</h3>
+        <p>Honest deals, device checks, and after-sale support you can always rely on.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🚚</div>
+        <h3>Nationwide Delivery</h3>
+        <p>Fast and secure delivery to any state in Nigeria within 24–48 hours.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💬</div>
+        <h3>Instant WhatsApp Support</h3>
+        <p>Chat directly with us to ask questions, negotiate, and confirm orders in real time.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">💰</div>
+        <h3>Competitive Pricing</h3>
+        <p>Best market prices with flexible payment options. No hidden charges, ever.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="text-center py-8 text-gray-500 text-sm">
-    © 2026 BMS TECH. Phones • Laptops • Gadgets
-  </footer>
+<!-- ── Product Catalog ── -->
+<section id="catalog" style="background: var(--bg);">
+  <div class="catalog-inner">
+    <div class="catalog-header">
+      <div>
+        <div class="section-label">Available Now</div>
+        <div class="section-title">Shop Our Catalog</div>
+      </div>
+      <div class="filter-tabs">
+        <button class="tab active" onclick="filterProducts('all', this)">All</button>
+        <button class="tab" onclick="filterProducts('phones', this)">Phones</button>
+        <button class="tab" onclick="filterProducts('laptops', this)">Laptops</button>
+        <button class="tab" onclick="filterProducts('accessories', this)">Accessories</button>
+      </div>
+    </div>
 
-  <!-- Instagram Loader Script -->
-  <script src="./insta-embeds/loader.js" defer></script>
+    <div class="products-grid" id="productsGrid">
+
+      <!-- iPhone 15 Pro Max -->
+      <div class="product-card visible" data-category="phones">
+        <div class="product-img">
+          📱
+          <span class="product-badge">New</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Smartphones</div>
+          <div class="product-name">iPhone 15 Pro Max</div>
+          <div class="product-specs">256GB · Natural Titanium · 5G</div>
+          <div class="product-footer">
+            <div class="product-price">₦890,000 <small>Brand New</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20iPhone%2015%20Pro%20Max" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Samsung S24 Ultra -->
+      <div class="product-card visible" data-category="phones">
+        <div class="product-img">
+          📱
+          <span class="product-badge badge-hot">Hot</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Smartphones</div>
+          <div class="product-name">Samsung Galaxy S24 Ultra</div>
+          <div class="product-specs">512GB · Titanium Black · S Pen</div>
+          <div class="product-footer">
+            <div class="product-price">₦850,000 <small>Brand New</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20Samsung%20S24%20Ultra" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- iPhone 14 -->
+      <div class="product-card visible" data-category="phones">
+        <div class="product-img">
+          📱
+          <span class="product-badge badge-used">UK Used</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Smartphones</div>
+          <div class="product-name">iPhone 14 Pro</div>
+          <div class="product-specs">128GB · Deep Purple · Face ID</div>
+          <div class="product-footer">
+            <div class="product-price">₦470,000 <small>Neatly Used</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20iPhone%2014%20Pro" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tecno Spark -->
+      <div class="product-card visible" data-category="phones">
+        <div class="product-img">
+          📱
+          <span class="product-badge">New</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Smartphones</div>
+          <div class="product-name">Tecno Spark 20 Pro</div>
+          <div class="product-specs">256GB · 8GB RAM · 5000mAh</div>
+          <div class="product-footer">
+            <div class="product-price">₦135,000 <small>Brand New</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20Tecno%20Spark%2020%20Pro" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MacBook Air -->
+      <div class="product-card visible" data-category="laptops">
+        <div class="product-img">
+          💻
+          <span class="product-badge">New</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Laptops</div>
+          <div class="product-name">MacBook Air M2</div>
+          <div class="product-specs">8GB RAM · 256GB SSD · 13.6"</div>
+          <div class="product-footer">
+            <div class="product-price">₦820,000 <small>Brand New</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20MacBook%20Air%20M2" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HP Laptop -->
+      <div class="product-card visible" data-category="laptops">
+        <div class="product-img">
+          💻
+          <span class="product-badge badge-used">UK Used</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Laptops</div>
+          <div class="product-name">HP EliteBook 840 G8</div>
+          <div class="product-specs">16GB RAM · 512GB SSD · Core i5</div>
+          <div class="product-footer">
+            <div class="product-price">₦310,000 <small>Neatly Used</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20HP%20EliteBook%20840%20G8" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AirPods Pro -->
+      <div class="product-card visible" data-category="accessories">
+        <div class="product-img">
+          🎧
+          <span class="product-badge">New</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Accessories</div>
+          <div class="product-name">AirPods Pro (2nd Gen)</div>
+          <div class="product-specs">Active Noise Cancellation · USB-C</div>
+          <div class="product-footer">
+            <div class="product-price">₦95,000 <small>Brand New</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20AirPods%20Pro%202nd%20Gen" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charger -->
+      <div class="product-card visible" data-category="accessories">
+        <div class="product-img">
+          🔌
+          <span class="product-badge">New</span>
+        </div>
+        <div class="product-body">
+          <div class="product-category">Accessories</div>
+          <div class="product-name">Apple 20W USB-C Charger</div>
+          <div class="product-specs">Fast Charge · Original · iPhone 15 Ready</div>
+          <div class="product-footer">
+            <div class="product-price">₦18,000 <small>Brand New</small></div>
+            <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20interested%20in%20Apple%2020W%20USB-C%20Charger" target="_blank" class="btn-wa">Order</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top: 2.5rem;">
+      <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">Don't see what you're looking for? We source on request.</p>
+      <a href="https://wa.me/2348155586606?text=Hi%2C%20I%27m%20looking%20for%20a%20specific%20device" target="_blank" class="btn-outline" style="display:inline-flex; gap: 0.5rem;">💬 Request a Device</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ── -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <div style="text-align:center; max-width: 520px; margin: 0 auto 3.5rem;">
+      <div class="section-label">The Process</div>
+      <div class="section-title">How It Works</div>
+      <p class="section-sub" style="margin: 0 auto;">From browsing to delivery — simple, fast, and transparent.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Browse & Pick</h3>
+        <p>Browse our catalog above and choose the device you want.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Chat With Us</h3>
+        <p>Click "Order" or message us on WhatsApp to confirm availability and price.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Pay Securely</h3>
+        <p>Make payment via bank transfer or other agreed method.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Fast Delivery</h3>
+        <p>Your device is packed and shipped to you anywhere in Nigeria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ── -->
+<section id="testimonials" style="background: var(--bg);">
+  <div class="testimonials-inner">
+    <div style="text-align:center; max-width: 520px; margin: 0 auto 3rem;">
+      <div class="section-label">Customer Reviews</div>
+      <div class="section-title">What Our Buyers Say</div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Got my iPhone 14 Pro in perfect condition. Delivered in less than 24 hours to Abuja. Very trustworthy seller, I'll definitely order again.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AO</div>
+          <div>
+            <div class="testi-name">Adaeze Okafor</div>
+            <div class="testi-loc">Abuja, FCT</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Best place to buy phones in Nigeria. The price was fair and the packaging was excellent. My MacBook arrived sealed, no issues at all.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">KI</div>
+          <div>
+            <div class="testi-name">Kayode Ibrahim</div>
+            <div class="testi-loc">Lagos, NG</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Ordered Samsung S24 Ultra, they confirmed availability immediately on WhatsApp. Very professional, fast response, highly recommended!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">NN</div>
+          <div>
+            <div class="testi-name">Ngozi Nwosu</div>
+            <div class="testi-loc">Port Harcourt, NG</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to Get Your <span>Device?</span></h2>
+    <p>Chat with us instantly on WhatsApp and secure your gadget today. Fast responses, honest prices.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/2348155586606?text=Hi%20BMS%20TECH%2C%20I%20want%20to%20buy%20a%20device" target="_blank" class="btn-primary">
+        💬 Start WhatsApp Chat
+      </a>
+      <a href="#catalog" class="btn-outline">Browse Catalog</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">BMS<span> TECH</span></span>
+        <p class="footer-desc">Your trusted source for quality smartphones, laptops, and accessories. Verified devices, honest pricing, and nationwide delivery.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#catalog">All Devices</a></li>
+          <li><a href="#catalog">Smartphones</a></li>
+          <li><a href="#catalog">Laptops</a></li>
+          <li><a href="#catalog">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/2348155586606" target="_blank">WhatsApp</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 BMS TECH. Phones · Laptops · Gadgets. All rights reserved.</p>
+      <a href="https://wa.me/2348155586606" target="_blank" class="footer-wa">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        +234 815 558 6606
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // Product filter
+  function filterProducts(category, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.product-card').forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.classList.add('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+    });
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .feat-card, .step, .testi-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
 
 </body>
 </html>
